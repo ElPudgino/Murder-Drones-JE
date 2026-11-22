@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "md_je_je:testblock"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}]
+    }
+}

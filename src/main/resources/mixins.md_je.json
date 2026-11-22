@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "compatibilityLevel": "JAVA_8",
+  "package": "pzi.md_je.mixin",
+  "refmap": "mixins.md_je.refmap.json",
+  "mixins": [
+    "MixinEntityPlayer"
+  ],
+  "client": ["MixinMinecraft", "MixinEntityRenderer", "MixinEntityPlayerSP"],
+  "server": []
+}

@@ -1,0 +1,1 @@
+Turns out tou just need to negate y positions from blockbench for handanims to fix them.

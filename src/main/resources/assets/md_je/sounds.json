@@ -1,0 +1,10 @@
+{
+  "gunshot": {
+    "subtitle": "md_je.subtitle.gunshot",
+    "sounds": [ "md_je:shot"]
+  },
+  "slash": {
+    "subtitle": "md_je.subtitle.slash",
+    "sounds": [ "md_je:slash"]
+  }
+}

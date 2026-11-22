@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "md_je",
+    "name": "Murder Drones: Java Edition",
+    "description": "Allows you to play as a disassembly drone. More stuff planned in the future.",
+    "version": "${version}",
+    "mcversion": "1.12.2",
+    "url": "",
+    "updateJSON": "",
+    "authorList": ["ElPudgino"],
+    "credits": "Thanks to Glitch and Liam Vickers for making the original show!",
+    "logoFile": "assets/md_je/mod_icon.png",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

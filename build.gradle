@@ -1,0 +1,114 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url = "https://plugins.gradle.org/m2" }
+        maven { url = "https://repo.spongepowered.org/maven" }
+        maven { url = "https://maven.minecraftforge.net/" }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: "org.spongepowered.mixin"
+
+version = project.modVersion
+group = project.modGroup
+archivesBaseName = project.modBaseName
+
+compileJava.options.encoding = compileTestJava.options.encoding = "UTF-8"
+
+minecraft {
+    mappings channel: 'stable', version: "39-1.12"
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.md_je.json'
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.md_je.json'
+        }
+    }
+}
+
+processResources {
+	inputs.property "modVersion", project.version
+	
+	filesMatching("mcmod.info") {
+		expand "version": project.version
+	}
+}
+
+mixin {
+    add sourceSets.main, "mixins.md_je.refmap.json"
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    mavenCentral()
+    maven { url = "https://repo.spongepowered.org/maven" }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.12.2-14.23.5.2855"
+
+    implementation "org.spongepowered:mixin:0.8.3-SNAPSHOT"
+    annotationProcessor 'org.spongepowered:mixin:0.8.3-SNAPSHOT:processor'
+}
+
+jar {
+    manifest {
+        attributes([
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.version,
+                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+                "MixinConfigs": "mixins.md_je.json",
+                "FMLCorePluginContainsFMLMod": "true",
+                "ForceLoadAsMod": "true",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+    exclude "src/main/java/pzi/md_je/entities/costil.py"
+}
+
+jar.finalizedBy('reobfJar')
+
+// FG5's legacy 1.12 runs put the distribution JAR on the launch classpath.
+// Its TweakClass/ForceLoadAsMod manifest is needed in a normal mods directory,
+// but creates a second discovery route in development. Launch from the compiled
+// output instead; the run configurations above already bootstrap Mixin explicitly.
+// Rewrite immediately before launch: ForgeGradle creates these tasks late and
+// populates their classpaths after the normal project configuration phase.
+tasks.withType(JavaExec).configureEach {
+    if (name in ['runClient', 'runServer']) {
+        dependsOn classes
+        doFirst {
+            def modJar = tasks.named('jar', Jar).get().archiveFile.get().asFile
+            classpath = (classpath - files(modJar)) + sourceSets.main.output
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+sourceSets.all { it.output.resourcesDir = it.output.classesDirs.getFiles().iterator().next() }
+
+
