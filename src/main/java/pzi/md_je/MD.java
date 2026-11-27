@@ -38,7 +38,7 @@ public class MD {
 
     public static final String MODID = "md_je";
     public static final String MODNAME = "Murder Drones: Java Edition";
-    public static final String MODVERSION= "0.1.0";
+    public static final String MODVERSION= "0.1.1";
 
     public static CreativeTabs tab = new MDCreativeTab(MODID);
 
