@@ -39,7 +39,7 @@ public class FlightDD
     private final float tangentAcc = 3f;
     private final float trgVel = 1.2f;
 
-    public static final AxisAlignedBB wingsBB = new AxisAlignedBB(-1.4f, 1.2f, -1.4f, 1.4f, 2.4f, 1.4f);
+    public static final AxisAlignedBB wingsBB = new AxisAlignedBB(-1.4f, 2.2f, -1.4f, 1.4f, 3.2f, 1.4f);
 
     public FlightDD(StatsDD st)
     {

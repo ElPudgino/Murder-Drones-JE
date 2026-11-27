@@ -183,6 +183,8 @@ public class DDMorph implements IMorph, IChargeHolder, IHeatHolder, IOilHolder, 
         dummy.limbSwing = owner.limbSwing;
         dummy.limbSwingAmount = owner.limbSwingAmount;
         dummy.prevLimbSwingAmount = owner.prevLimbSwingAmount;
+        dummy.swingProgress = owner.swingProgress;
+        dummy.prevSwingProgress = owner.prevSwingProgress;
     }
     public void RenderAt(double x, double y, double z, float partial)
     {

@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import pzi.md_je.MD;
 import pzi.md_je.entities.EntityMD;
+import pzi.md_je.entities.DD.ModelEntityDD;
 import pzi.md_je.rendering.BloomQueue;
 import pzi.md_je.rendering.AnimLoader.AnimationData;
 import pzi.md_je.rendering.AnimLoader.BoneAnimation;

@@ -31,9 +31,9 @@ public abstract class InnateWeapon<T extends IMorph, R extends AnimModelBase>
     public void OnLeftClickHold() {}
     public void OnRightClickHold() {}
 
-    public void OnRenderPre(R model) {}
+    public void OnRenderPre(R model, float swing) {}
     public void OnRenderPost() {}
-    public void OnHandRenderPre(R model) {}
+    public void OnHandRenderPre(R model, float swing) {}
     public void OnHandRenderPost() {}
 
     public void OnSelect() {selected = true;}

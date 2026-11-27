@@ -38,14 +38,14 @@ public class DD_Claws extends InnateWeapon<DDMorph, ModelEntityDD>
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void OnRenderPre(ModelEntityDD model)
+    public void OnRenderPre(ModelEntityDD model, float swing)
     {
         model.hand_claw.isHidden = false;
         if (GetAnimator().IsActive(ModelEntityDD.dash)) GetAnimator().ContinueAnim(ModelEntityDD.dash_claw, 1f, 1f);
     }
 
     @Override 
-    public void OnHandRenderPre(ModelEntityDD model)
+    public void OnHandRenderPre(ModelEntityDD model, float swing)
     {
         model.hand_claw.isHidden = false;
         EntityAnimator animator = GetHandAnimator();

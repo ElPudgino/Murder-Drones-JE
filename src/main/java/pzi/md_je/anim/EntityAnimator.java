@@ -3,6 +3,7 @@ package pzi.md_je.anim;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.util.math.MathHelper;
 import pzi.md_je.rendering.AnimLoader.AnimationData;
 
 public class EntityAnimator 
@@ -18,7 +19,7 @@ public class EntityAnimator
         }
         return null;
     }
-    public void StartAnim(AnimationData anim, float speed, float weight)
+    public EntityAnim StartAnim(AnimationData anim, float speed, float weight)
     {
         EntityAnim ea = FindAnim(anim);
         if (ea == null)
@@ -38,6 +39,7 @@ public class EntityAnimator
             ea.speed = speed;
             ea.active = true;
         }
+        return ea;
     }
     public void StopAnim(AnimationData anim)
     {
@@ -61,6 +63,22 @@ public class EntityAnimator
             ea.speed = speed;
             ea.weight = weight;
         }
+    }
+    public void SetAnimProgress(AnimationData anim, float weight, float progress)
+    {
+        EntityAnim ea = FindAnim(anim);
+        if (ea == null)
+        {
+            ea = StartAnim(anim, 0f, weight);
+        }
+        else
+        {
+            ea.active = true;
+            ea.continued = true;
+            ea.speed = 0f;
+            ea.weight = weight;
+        }
+        ea.curTime = ea.curData.length * (progress % 1f);
     }
     public void UpdateAnims()
     {

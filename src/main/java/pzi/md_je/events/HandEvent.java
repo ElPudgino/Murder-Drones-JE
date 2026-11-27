@@ -15,13 +15,7 @@ import pzi.md_je.player.PlayerMorphs;
 @EventBusSubscriber (modid = MD.MODID, value = Side.CLIENT)
 public class HandEvent 
 {
-    public static float x;
-    public static float y;
-    public static float z;
 
-    public static float ax;
-    public static float ay;
-    public static float az;
 
     @SideOnly (Side.CLIENT)
     @SubscribeEvent

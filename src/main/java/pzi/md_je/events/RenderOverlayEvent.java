@@ -41,7 +41,8 @@ public class RenderOverlayEvent
             event.setCanceled(true);
         }
         if (event.isCancelable() && (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR
-            || event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE))
+            || event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+            || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR)
         {
             if (pc.GetMorph() == Morphs.DD && ((DDMorph)pc).IsCombatMode()) event.setCanceled(true);
         }

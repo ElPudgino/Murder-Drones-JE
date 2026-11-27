@@ -3,6 +3,7 @@ package pzi.md_je.entities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import pzi.md_je.MD;
 import pzi.md_je.anim.AnimModelBase;
 import pzi.md_je.anim.EntityAnimator;
 import pzi.md_je.rendering.BloomQueue;
@@ -22,25 +23,26 @@ public abstract class HandRender<T extends Entity, G extends AnimModelBase>
     public void RenderHands(T dummy, EntityPlayer owner, float swing)
     {
         checkModelCompiled(dummy);
-        PreAnimate(dummy, owner);
+        PreAnimate(dummy, owner, swing);
         float partial = Minecraft.getMinecraft().getRenderPartialTicks();
         float armSwingAmount = owner.prevLimbSwingAmount + (owner.limbSwingAmount - owner.prevLimbSwingAmount) * partial;
         animate(dummy,owner,owner.ticksExisted + partial, swing);
         GetModel().setRotationAnglesExternal(owner.limbSwing, armSwingAmount, owner.ticksExisted + partial,
              0,0, 1, dummy, animator);
-        PostAnimate(dummy, owner);
+        PostAnimate(dummy, owner, swing);
     }
-    protected void PreAnimate(T dummy, EntityPlayer owner)
+    protected void PreAnimate(T dummy, EntityPlayer owner, float swing)
     {
 
     }
-    protected void PostAnimate(T dummy, EntityPlayer owner)
+    protected void PostAnimate(T dummy, EntityPlayer owner, float swing)
     {
 
     }
     protected void animate(T dummy, EntityPlayer owner, float ageInTicks, float swing)
     {
-        if (BloomQueue.Pass.Normal == BloomQueue.cPass) animator.ProgressAnims(ageInTicks);       
+        if (BloomQueue.Pass.Bloom == BloomQueue.cPass) return;
+        animator.ProgressAnims(ageInTicks);       
     }
     protected abstract G GetModel();
     public abstract void checkModelCompiled(T dummy);

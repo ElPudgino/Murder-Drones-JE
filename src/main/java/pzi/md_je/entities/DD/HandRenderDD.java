@@ -20,7 +20,7 @@ public class HandRenderDD extends HandRender<EntityDDMorph, ModelEntityDD>
 {
     
     @Override
-    protected void PreAnimate(EntityDDMorph dummy, EntityPlayer owner)
+    protected void PreAnimate(EntityDDMorph dummy, EntityPlayer owner, float swing)
     {
         GlStateManager.pushMatrix();
         GlStateManager.rotate(180f, 0, 0, 1);
@@ -31,10 +31,10 @@ public class HandRenderDD extends HandRender<EntityDDMorph, ModelEntityDD>
         m.hand_hmg.isHidden = true;
         m.arm_r.setRotationPoint(0,0,0);
 		AnimModelBase.setRotationAngle(m.arm_r, 0,0,0);
-        wep.OnHandRenderPre(m);
+        wep.OnHandRenderPre(m, swing);
     }
     @Override
-    protected void PostAnimate(EntityDDMorph dummy, EntityPlayer owner)
+    protected void PostAnimate(EntityDDMorph dummy, EntityPlayer owner, float swing)
     {
         GetModel().renderRightArm(dummy);
         BloomFramebuffer.StartDrawBloomExt();

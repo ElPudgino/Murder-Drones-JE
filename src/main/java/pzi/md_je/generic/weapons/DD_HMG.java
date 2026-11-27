@@ -68,12 +68,12 @@ public class DD_HMG extends InnateWeapon<DDMorph, ModelEntityDD>
     public int GetNumericId() {return 2;}
 
     @Override
-    public void OnRenderPre(ModelEntityDD model)
+    public void OnRenderPre(ModelEntityDD model, float swing)
     {
         preRenderGeneral(model);
     }
     @Override 
-    public void OnHandRenderPre(ModelEntityDD model)
+    public void OnHandRenderPre(ModelEntityDD model, float swing)
     {
         preRenderGeneral(model);
         GetHandAnimator().ContinueAnim(ModelEntityDD.aim_idle, 1f, 1f);

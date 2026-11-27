@@ -940,6 +940,8 @@ public class ModelEntityDD extends AnimModelBase
 	public static AnimationData claws_idle;
 	public static AnimationData claws_swing;
 	public static AnimationData aim_idle;
+	public static AnimationData hit_fp;
+	public static AnimationData mine;
 
 	public static void LoadAnims()
 	{
@@ -966,6 +968,8 @@ public class ModelEntityDD extends AnimModelBase
 			claws_idle = handanims.animations.get("idle");
 			claws_swing = handanims.animations.get("swing");
 			aim_idle = handanims.animations.get("aim");
+			hit_fp = handanims.animations.get("hit");
+			mine = handanims.animations.get("mine");
 		}
 		catch (IOException e)
 		{
@@ -996,7 +1000,7 @@ public class ModelEntityDD extends AnimModelBase
 		sad.isHidden = !dd.morph.statsDD.criticalState;
 		cat.isHidden = normal.isHidden || !sad.isHidden;
 		open.isHidden = x.isHidden || !sad.isHidden;
-		wep.OnRenderPre(this);
+		wep.OnRenderPre(this, dd.swingProgress * GraphicsUtils.GetPartialTick() + (1f - GraphicsUtils.GetPartialTick()) * dd.prevSwingProgress);
 		boolean wings_hidden = !dd.GetFlightController().areWingsOut() && 
 			!dd.animator.IsActive(ModelEntityDD.unfold_wings) && !dd.animator.IsActive(ModelEntityDD.fold_wings);
 		wing_base_left.isHidden = wings_hidden;

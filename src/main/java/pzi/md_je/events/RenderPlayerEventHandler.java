@@ -2,6 +2,7 @@ package pzi.md_je.events;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,8 +24,10 @@ public class RenderPlayerEventHandler
     @SubscribeEvent
     public static void OnRenderPlayer(RenderPlayerEvent.Pre e)
     {
-        IMorph morph = PlayerMorphs.GetMorph(e.getEntityPlayer());
+        EntityPlayer p = e.getEntityPlayer();
+        IMorph morph = PlayerMorphs.GetMorph(p);
         if (morph == null) return;
+        if (p.isInvisibleToPlayer(Minecraft.getMinecraft().player)) return;
         morph.RenderAt(e.getX(), e.getY(), e.getZ(), e.getPartialRenderTick());
         e.setCanceled(true);
     }
